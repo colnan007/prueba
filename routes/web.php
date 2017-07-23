@@ -13,4 +13,5 @@
 
 Route::get('/', function () {
     return view('welcome');
+    // dd(App\Customer::with(['city', 'zipcode'])->get());
 });

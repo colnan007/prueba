@@ -15,3 +15,10 @@ Route::get('/', function () {
     return view('welcome');
     // dd(App\Customer::with(['city', 'zipcode'])->get());
 });
+
+//Route::get('/customers', 'CustomerController@index')->name('customers.index');
+
+//Route::resource('customers', 'CustomerController', ['except' => ['create']]);
+
+Route::resource('customers', 'CustomerController');
+

@@ -15,7 +15,18 @@ class CustomerController extends Controller
     public function index()
     {
         //return 'Hola estoy en Index';
-        $customers=\DB::table('customers')->select('name','company_name','phone','email')->get();
+        
+        //$customers=\DB::table('customers')->select('name','company_name','phone','email')->get();
+        
+        //return $customers;
+        
+        //$customers = Customer::select('name','company_name','phone','email','city_id')->get();
+        //return $customers[0]->city()->get();
+
+        //$customers = Customer::with(['city','zipcode'])->select('id','name','phone','email','city_id','zipcode_id')->get();
+        //return $customers;
+
+        $customers = Customer::select('id','name','phone','email')->get();
         return $customers;
 
     }
@@ -49,7 +60,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return $customer->load(['city','zipcode']);
     }
 
     /**

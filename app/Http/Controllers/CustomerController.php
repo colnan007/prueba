@@ -15,7 +15,7 @@ class CustomerController extends Controller
     public function index()
     {
         //return 'Hola estoy en Index';
-        $customers=\DB::table('customers')->select('name','company_name','email')->get();
+        $customers=\DB::table('customers')->select('name','company_name','phone','email')->get();
         return $customers;
 
     }

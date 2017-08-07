@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\City;
+use App\Zipcode;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -38,7 +40,9 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return 'Pantalla para Crear Cliente';
+        $cities = City::select('id', 'description')->get();
+        $zipcodes = Zipcode::select('id','description')->get();
+        return view('customers.create', compact('cities','zipcodes'));
     }
 
     /**
@@ -49,7 +53,17 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       // dd($request->request);
+        // Customer::create([
+        //     'name'=>$request->name;
+        //     'company_name'=>$request->company_name;
+        //     'phone'=>$request->phone;
+        //     'email'=>$request->email;
+        //     'address-1'=>$request->address_1;
+        //]);
+        Customer::create($request->except('_token'));
+
+        return redirect()->route('customers.index');
     }
 
     /**
@@ -71,7 +85,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        // 
     }
 
     /**
@@ -94,6 +108,7 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        //DB::table("customers")->delete($id);
+        //return response()->json(['success'=>"Product Deleted successfully.", 'tr'=>'tr_'.$id]);
     }
 }
